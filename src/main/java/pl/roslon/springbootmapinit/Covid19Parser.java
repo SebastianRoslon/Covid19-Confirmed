@@ -21,7 +21,7 @@ public class Covid19Parser {
         List<Point> points = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
 
-        String restTemplateForObject = restTemplate.getForObject(URL_CONFIRMED, String.class);
+        String restTemplateForObject = restTemplate.getForObject(URL_DEATHS, String.class);
 
         StringReader stringReader = new StringReader(restTemplateForObject);
 
