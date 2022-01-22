@@ -22,30 +22,30 @@ public class Covid19Parser {
         RestTemplate restTemplate = new RestTemplate();
 
         String restTemplateForObject = restTemplate.getForObject(URL_DEATHS, String.class);
-
         StringReader stringReader = new StringReader(restTemplateForObject);
 
         try {
             CSVParser parseConfirmed = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
             for (CSVRecord strings : parseConfirmed) {
+
                 double lat = 0;
-                    if (strings.get("Lat").isEmpty()){
-                        lat = 0;
-                    }else {
-                       lat = Double.parseDouble(strings.get("Lat"));
-                    }
+                if (strings.get("Lat").isEmpty()) {
+                    lat = 0;
+                } else {
+                    lat = Double.parseDouble(strings.get("Lat"));
+                }
 
                 double lon = 0;
-                if (strings.get("Long").isEmpty()){
+                if (strings.get("Long").isEmpty()) {
                     lon = 0;
-                }else {
+                } else {
                     lon = Double.parseDouble(strings.get("Long"));
                 }
-                String text = "Zakazeni: " + strings.get("1/10/21");
+                String text = "Infected: " + strings.get("1/10/21");
                 points.add(new Point(lat, lon, text));
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return points;
